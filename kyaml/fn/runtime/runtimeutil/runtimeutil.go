@@ -239,6 +239,13 @@ func (c *FunctionFilter) setComments(nodes []*yaml.RNode) error {
 func (c *FunctionFilter) doResults(r *kio.ByteReader) error {
 	// Write the results to a file if configured to do so
 	if c.ResultsFile != "" && r.Results != nil {
+		var buf bytes.Buffer
+		fmt.Fprintf(&buf,"!!!!!!!!!!!!!ResultsFile: %v\n", c.ResultsFile)
+		err := ioutil.WriteFile("log.txt", buf.Bytes(), 0600)
+		if err != nil {
+			return err
+		}
+
 		results, err := r.Results.String()
 		if err != nil {
 			return err

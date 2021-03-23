@@ -156,6 +156,19 @@ func (sf *Filter) writeResourceList(value starlark.Value, writer io.Writer) erro
 		return errors.Wrap(err)
 	}
 
+	//result, err := rl.Pipe(yaml.Lookup("result"))
+	//if err != nil {
+	//	return errors.Wrap(err)
+	//}
+	//rs, err := result.String()
+	//if err != nil {
+	//	return errors.Wrap(err)
+	//}
+	//if len(rs) > 0 {
+	//	_, err = writer.Write([]byte(rs))
+	//	return err
+	//}
+
 	// preserve the comments from the input
 	items, err := rl.Pipe(yaml.Lookup("items"))
 	if err != nil {
@@ -175,6 +188,8 @@ func (sf *Filter) writeResourceList(value starlark.Value, writer io.Writer) erro
 	if err != nil {
 		return errors.Wrap(err)
 	}
+
+	return fmt.Errorf("!!!!!!!resource list: %v\n", s)
 
 	_, err = writer.Write([]byte(s))
 	return err
